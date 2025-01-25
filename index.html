@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="pass_strength.css">
+</head>
+<body>
+    <nav>
+        <img src="i_logo.jpg" height="50px" width="60px" id="logo">
+        <ul>
+            <li><a class="li">HOME</a></li>
+            <li><a class="li">ABOUT US</a></li>
+            <li><a class="li">CONTACT US</a></li>
+            <li><button class="login">LOGIN</button></li>
+        </ul>
+    </nav>
+    <main>
+        <div class="outer">
+            <p class="outer_head">PASSWORD STRENGTH</p>
+            <label for="pass">PASSWORD: </label><input type="password" id="pass" class="pass">
+            <button onclick="clear()" id="clear">clear</button>
+            <p id="strength"></p>
+            
+        </div>
+    </main>
+    <footer>
+        <p>
+             Contact Us: (123) 456-7890               
+             Email: info@yourcompany.com              
+             Address: 123 Main St, Anytown, USA       
+        </p>
+        <div class="foot_list">
+            <ul>
+                <li class="foot_head"><a>link1</a></li>
+                <li><a>link2</a></li>
+                <li><a>link3</a></li>
+                <li><a>link4</a></li>
+                <li><a>link4</a></li>
+                <li><a>link4</a></li>
+                <li><a>link4</a></li>
+                <li><a>link4</a></li>
+                <li><a>link4</a></li>
+                <li><a>link4</a></li>
+            </ul>
+            <ul>
+                <li class="foot_head"><a>link1</a></li>
+                <li><a>link2</a></li>
+                <li><a>link3</a></li>
+                <li><a>link4</a></li>
+            </ul>
+            <ul>
+                <li class="foot_head"><a>link1</a></li>
+                <li><a>link2</a></li>
+                <li><a>link4</a></li>
+                <li><a>link4</a></li>
+                <li><a>link4</a></li>
+                <li><a>link3</a></li>
+                <li><a>link4</a></li>
+            </ul>
+        </div>
+    </footer>
+    <postfooter>
+        © 2024 Your Company | | Privacy Policy | Terms
+    </postfooter>
+    <script>
+        let s=0,n=0,b=0,m=0;
+        const input=document.querySelector('#pass');
+        const pass=input.value 
+        const show=document.getElementById('strength');
+        const symbol = [
+            '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '_', '=', '+',
+            '[', ']', '{', '}', '\\', '|', ';', ':', "'", '"', ',', '.', '/', '<', '>', '?',
+            '`', '~'
+            ];
+        const num=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+        const big=['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+        const small=['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+
+        addEventListener('keydown',(e)=>{
+            
+            if(e.key=='Enter')
+            {
+
+                let i=1,j=0;
+                for( i=0;i<input.value.length;i++)
+                { 
+                    for(let j=0;j<num.length;j++)
+                    {
+                        if(input.value.split('')[i]==num[j])
+                        {
+                            n++;
+                        }  
+                    }
+                }
+
+                for(i=0;i<input.value.length;i++)
+                {
+                     for(j=0;j<big.length;j++)
+                     {
+                        if(input.value.split('')[i]==big[j])
+                        {
+                            b++;
+                        }
+                    }
+                }
+                for(i=1;i<=input.value.length;i++)
+                {
+                    for(j=0;j<small.length;j++)
+                    {
+                        if(input.value.split('')[i]==small[j])
+                        {
+                            s++;
+                        }
+                    }
+                }
+                for(i=1;i<=input.value.length;i++)
+                {
+                    for(j=0;j<num.length;j++)
+                    {
+                        if(input.value[i]==symbol[j])
+                        {
+                            m++;
+                        }
+                    }
+
+                }
+                console.log(m)
+                console.log(n)
+                console.log(b)
+                console.log(s)
+
+                if(s>0 && m>0 && b>0 && n>0)
+                {
+                    show.innerText='strong' 
+                    show.style.backgroundColor='aquamarine'
+                    show.style.borderColor='darkgreen'
+                    show.style.color='darkgreen'
+                    show.style.visibility="visible";
+                }
+                else
+                {
+                    if(s==0 || m==0 || b==0 || n==0)
+                    {
+                        show.innerText='weak'
+                        show.style.backgroundColor='white'
+                        show.style.borderColor='red'
+                        show.style.color='red'
+                        show.style.visibility="visible";
+                    }   
+                }
+            }
+        })
+
+        const ll=document.getElementById('clear')
+            ll.addEventListener('click',(e)=>
+            {
+                input.value="" ;
+                show.style.visibility="hidden";
+                
+            })
+
+    </script>
+</body>
+</html>
